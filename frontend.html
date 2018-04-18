@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>I F</title>
+		<title></title>
 	</head>
 	<body>
 		<h1>UI/UX </h1>
@@ -58,8 +58,7 @@
 		</section>
 		<section>
 			<h2>Interaction Flow</h2>
-			<!--Use an HTML unordered list.-->
-			<ol>
+			<ul>
 				<li>Ricky views a image on Imgur.com, decides he wants to comment</li>
 				<li>Imgur prompts him with a text entry field</li>
 				<li>Ricky writes his comment; hits submit</li>
@@ -68,7 +67,37 @@
 				<!--<li>Imgur prompts him with text area<li>-->
 				<!--<li>Ricky writes his new comment; hits submit</li>-->
 				<!--<li>Imgur writes new "grandchild" reply to database, retains association with original comment</li>-->
-			</ol>
+			</ul>
+		</section>
+		<section id="conceptual-model">
+			<div>
+				<h1>Entities</h1>
+				<h2>profile</h2>
+				<dl>
+					<dt>profileId</dt>
+					<dd>primary key</dd>
+					<dt>profileTimeStamp</dt>
+					<dd>do we need a date/time-- maybe just to check whether the comment is still there
+						after the profile was deleted?
+					</dd>
+					<dt>profilePhone</dt>
+					<dt>profileEmail</dt>
+					<dt>profileUsername</dt>
+				</dl>
+				<h2>comment</h2>
+				<dl>
+					<dt>commentId</dt>
+					<dd>primary key</dd>
+					<dt>commentProfileId</dt>
+					<dd>foriegn key</dd>
+					<dt>commentCommentId</dt>
+					<dd>foreign key calling replys</dd>
+					<dt>commmentTimestamp</dt>
+					<dd>register time</dd>
+					<dt>commentViaTag</dt>
+					<dd>especially for persona, designate whether its via iphone or android,</dd>
+				</dl>
+			</div>
 		</section>
 	</body>
 </html>
