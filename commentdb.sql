@@ -9,9 +9,10 @@ CREATE TABLE profile (
 	profileID BINARY(16) NOT NULL,
 	profileUsername VARCHAR(32),
 	profileEmail VARCHAR(128),
-	profileDateJoined VARCHAR (128) NOT NULL,
+	profileTimestamp VARCHAR (128) NOT NULL,
 	profilePhone VARCHAR(32),
-	-- phone vs email - whether null values are flagged by unique or not (solved - doesn't apply for mySQL
+
+	-- phone vs email - whether null values are flagged by unique or not (solved - doesn't apply for mySQL)
 	UNIQUE(profileUsername),
 	UNIQUE(profileEmail),
 	PRIMARY KEY(profileId)
@@ -23,6 +24,7 @@ CREATE TABLE comment (
 	commentReplyId BINARY(16),
 	commentContent VARCHAR(140) NOT NULL,
 	commentTimestamp DATETIME(6) NOT NULL,
+	commentViaTag TINYINT ,
 	INDEX(commentProfileId),
 	--can you index something that's optional (notnull?)
 	INDEX(commentReplyId),
