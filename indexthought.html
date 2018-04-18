@@ -2,43 +2,53 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Notesthought</title>
+		<title>Conceptual Model</title>
 	</head>
 	<body>
-		<div>
-			<h1>UI/UX</h1>
-			<ul>
-				<li>Persona</li>
-				<li>User Story</li>
-				<li>Use Cases</li>
-				<li>Interaction Flow</li>
-				<li></li>
-			</ul>
-		</div>
+		<!--<div>-->
+		<!--<h1>UI/UX</h1>-->
+		<!--<ul>-->
+		<!--<li>Persona</li>-->
+		<!--<li>User Story</li>-->
+		<!--<li>Use Cases</li>-->
+		<!--<li>Interaction Flow</li>-->
+		<!--<li></li>-->
+		<!--</ul>-->
+		<!--</div>-->
 		<div>
 			<h1>Entities</h1>
 			<h2>profile</h2>
 			<dl>
-				<dt>profileId</dt><dd>primary key</dd>
-				<dt>profileTimeStamp*?</dt><dd>do we need a date/time-- maybe just to check whether the comment is still there
-			after the profile was deleted?</dd>
-				<dt>profileUN</dt>
-				<dt>profileViaTag</dt><dd>especially for persona, designate whether its via iphone or android, etc.. should this go in
-			comment?</dd>
+				<dt>profileId</dt>
+				<dd>primary key</dd>
+				<dt>profileTimeStamp</dt>
+				<dd>do we need a date/time-- maybe just to check whether the comment is still there
+					after the profile was deleted?
+				</dd>
+				<dt>profilePhone</dt>
+				<dt>profileEmail</dt>
+				<dt>profileUsername</dt>
 			</dl>
 			<h2>comment</h2>
 			<dl>
-				<dt>commentId</dt><dd>primary key</dd>
-				<dt>commentProfileId</dt> <dd>foriegn key</dd>
-				<dt>commentReplyId</dt><dd>foreign key calling replys
-				<dt>commentThreadId</dt><dd>third foriegn key to claim original thread, references the original poster's</dd>
-				<dt>commmentTimestamp</dt><dd>register time</dd>
+				<dt>commentId</dt>
+				<dd>primary key</dd>
+				<dt>commentProfileId</dt>
+				<dd>foriegn key</dd>
+				<dt>commentCommentId</dt>
+				<dd>foreign key calling replys</dd>
+				<!--<dt>commentThreadId</dt>
+				<dd>third foriegn key to claim original thread, references the original poster's</dd>-->
+				<dt>commmentTimestamp</dt>
+				<dd>register time</dd>
+				<dt>commentViaTag</dt>
+				<dd>especially for persona, designate whether its via iphone or android,</dd>
 			</dl>
 		</div>
-		<h1>Possible: Image ref</h1>
-			<p>within comments one can refer to particular images and can be extremely useful when commenting on large
-			collections, such as my example post at <a href="https://imgur.com/gallery/ZanEt"> Imgur</a>  but not sure if
-			that requires referral in the database or whether that could be a purely front-end relationship</p>
+		<!--<h1>Possible: Image ref</h1>-->
+		<!--<p>within comments one can refer to particular images and can be extremely useful when commenting on large-->
+		<!--collections, such as my example post at <a href="https://imgur.com/gallery/ZanEt"> Imgur</a> but not sure if-->
+		<!--that requires referral in the database or whether that could be a purely front-end relationship</p>-->
 
 	</body>
 </html>
