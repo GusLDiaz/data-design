@@ -21,15 +21,15 @@ CREATE TABLE profile (
 CREATE TABLE comment (
 	commentId BINARY(16) NOT NULL,
 	commentProfileId BINARY(16) NOT NULL,
-	commentReplyId BINARY(16),
+	commentCommentId BINARY(16),
 	commentContent VARCHAR(140) NOT NULL,
 	commentTimestamp DATETIME(6) NOT NULL,
 	commentViaTag TINYINT ,
 	INDEX(commentProfileId),
 	--can you index something that's optional (notnull?)
-	INDEX(commentReplyId),
+	INDEX(commentCommentId),
 	FOREIGN KEY(commentProfileId) REFERENCES profile(profileId),
-	FOREIGN KEY(commentReplyId) REFERENCES comment(commentId),
+	FOREIGN KEY(commentCommentId) REFERENCES comment(commentId),
 	--analyse for recursion?
 	PRIMARY KEY(commentId)
 );
