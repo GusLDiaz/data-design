@@ -7,6 +7,7 @@ CREATE TABLE profile (
 	-- this creates the attribute for the primary key
 	-- not null means the attribute is required!
 	profileID BINARY(16) NOT NULL,
+	profileHash CHAR(97) NOT NULL,
 	profileUsername VARCHAR(32),
 	profileEmail VARCHAR(128),
 	profileTimestamp VARCHAR (128) NOT NULL,
