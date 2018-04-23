@@ -49,9 +49,12 @@ class Profile /**implements JSONSerializable*/ {
 		 * @var string $profilePhone
 		 */
 		private $profilePhone;
+		/**
+		 * @var DateTime $profileTimestamp
+		 */
+		private $profileTimestamp;
 	}
-}
-
+public static function
 
 
 
