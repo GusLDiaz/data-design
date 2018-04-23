@@ -60,4 +60,4 @@ public static function
 
 
 
-public function __construct($profile...
+public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileUsername,$profileEmail)
