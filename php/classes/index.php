@@ -61,3 +61,147 @@ public static function
 
 
 public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileUsername,$profileEmail)
+
+
+
+
+	/**
+	 * constructor
+	 *
+	 * @param string|Uuid
+
+	 * @param string hash is used for password encryption
+	 * @param string $newProfileEmail? string containing  email address
+	 * @param string $newProfileUsername? string containing username
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if data types violate type hints
+	 * @Documentation https://php.net/manual/en/language.oop5.
+	 * @throws \Exception if some other exception occursdecon.php
+	 **/
+	public function __construct($profileId,string $profileEmail, $profileHash, string $profileUsername) {
+	try {
+		$this->setProfileId($newProfileId);
+		$this->setProfileEmail($newProfileIdEmail);
+		$this->setProfileHash($newProfileHash);
+		$this->setProfileUsername($newProfileUsername);
+	}
+		//determine what exception type was thrown
+	catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+		$exceptionType = get_class($exception);
+		throw(new $exceptionType($exception->getMessage(), 0, $exception));
+	}
+	/**
+	 * @return string
+	 */
+	public function getProfileEmail(): string {
+		return($this->profileEmail);
+	}
+	/**
+	 * sanatize
+	 * @param string $authorEmail
+	 */
+	public function setProfileEmail(string $profileEmail): void {
+		$this->profileEmail = $profileEmail;
+	}
+	/**
+	 * what do you need for hash acc/mutator?
+	 * @return string
+	 */
+	public function getProfileHash(): string {
+		return($this->authorHash);
+	}
+	/**
+	 * @param string $profileHash
+	 */
+	public function setProfileHash(string $profileHash): void {
+		$this->authorHash = $profileHash;
+	}
+	/**
+
+	 */
+	public function getProfileUsername(): string {
+		return ($this->profileUsername);
+	}
+	/**
+	 * @param string $profileName
+	 */
+	public function setProfileUsername(string $profileUsername): void {
+		$this->profileUsername = $profileUsername;
+	}
+
+
+
+}
+
+
+
+/**
+ * @return array resulting state variables to serialize
+ *  state variables for JSON serialization
+ * *unset hash?? add for token
+ **/
+	public function jsonSerialize() {
+	$fields = get_object_vars($this);
+	$fields["profileId"] = $this->profileId->toString();
+	unset($fields["profileHash"]);
+	return ($fields);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
