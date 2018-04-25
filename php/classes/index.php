@@ -16,7 +16,7 @@
 /**use validate UUID?
  *
  */
-class Profile /**implements JSONSerializable*/ {
+class Profile implements JSONSerializable {
 
 //protected $profileId n null
 //<dd>primary key</dd>
@@ -54,7 +54,7 @@ class Profile /**implements JSONSerializable*/ {
 		 */
 		private $profileTimestamp;
 	}
-public static function
+//public static function
 
 
 
@@ -69,7 +69,6 @@ public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileU
 	 * constructor
 	 *
 	 * @param string|Uuid
-
 	 * @param string hash is used for password encryption
 	 * @param string $newProfileEmail? string containing  email address
 	 * @param string $newProfileUsername? string containing username
@@ -77,7 +76,7 @@ public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileU
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws \TypeError if data types violate type hints
 	 * @Documentation https://php.net/manual/en/language.oop5.
-	 * @throws \Exception if some other exception occursdecon.php
+	 * @throws \Exception if some other exception occurs\
 	 **/
 	public function __construct($profileId,string $profileEmail, $profileHash, string $profileUsername) {
 	try {
@@ -99,6 +98,7 @@ public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileU
 	}
 	/**
 	 * sanatize
+	 * strlength
 	 * @param string $authorEmail
 	 */
 	public function setProfileEmail(string $profileEmail): void {
@@ -109,7 +109,7 @@ public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileU
 	 * @return string
 	 */
 	public function getProfileHash(): string {
-		return($this->authorHash);
+		return($this->profileHash);
 	}
 	/**
 	 * @param string $profileHash
@@ -124,10 +124,22 @@ public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileU
 		return ($this->profileUsername);
 	}
 	/**
-	 * @param string $profileName
+	 * @param string $profileUsername
 	 */
 	public function setProfileUsername(string $profileUsername): void {
 		$this->profileUsername = $profileUsername;
+	}
+	/**
+
+	 */
+	public function getProfileTimestamp(): DateTime {
+		return ($this->profileTimestamp);
+	}
+	/**
+	 * @param string $profileUsername
+	 */
+	public function setProfileTimestamp(DateTime $profileTimestamp): void {
+		$this->profileTimestamp = $profileTimestamp;
 	}
 
 
@@ -147,8 +159,9 @@ public function __construct($profileId,$profileTimeStamp,$profilePhone,$profileU
 	unset($fields["profileHash"]);
 	return ($fields);
 }
-}
-
+/**
+ *
+ */
 
 
 
