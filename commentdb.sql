@@ -7,11 +7,11 @@ CREATE TABLE profile (
 	-- this creates the attribute for the primary key
 	-- not null means the attribute is required!
 	profileID BINARY(16) NOT NULL,
-	profileHash CHAR(97) NOT NULL,
-	profileUsername VARCHAR(32),
 	profileEmail VARCHAR(128),
-	profileTimestamp VARCHAR (128) NOT NULL,
+	profileHash CHAR(97) NOT NULL,
 	profilePhone VARCHAR(32),
+	profileTimestamp VARCHAR (128) NOT NULL,
+	profileUsername VARCHAR(32),
 
 	-- phone vs email - whether null values are flagged by unique or not (solved - doesn't apply for mySQL)
 	UNIQUE(profileUsername),
