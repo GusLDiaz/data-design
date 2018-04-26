@@ -16,13 +16,15 @@
  *
  * update delete insert
  */
+
 namespace Edu\Cnm\DataDesign;
+
 use Ramsey\Uuid\Uuid;
 
-class Profile implements JSONSerializable {
+class Profile implements \JsonSerializable {
 	use ValidateUuid;
-	/**use ValidateDate;
 
+	/**use ValidateDate;
 	 * use ValidateDate
 	 */
 
@@ -91,120 +93,121 @@ class Profile implements JSONSerializable {
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
-}
 
-/**
- * @return string
- */
-public
-function getProfileEmail(): string {
-	return ($this->profileEmail);
-}
-
-/**
- * sanatize
- * strlength
- * @param string $authorEmail
- */
-public
-function setProfileEmail(string $profileEmail): void {
-	$this->profileEmail = $newProfileEmail;
-}
-
-/**
- * what do you need for hash acc/mutator?
- * @return string
- */
-public
-function getProfileHash(): string {
-	return ($this->profileHash);
-}
-
-/**
- * @param string $profileHash
- */
-public
-function setProfileHash(string $profileHash): void {
-	$this->profileHash = $profileHash;
-}
-
-/**
- */
-public
-function getProfileUsername(): string {
-	return ($this->profileUsername);
-}
-
-/**
- * @param string $profileUsername
- */
-public
-function setProfileUsername(string $profileUsername): void {
-	$this->profileUsername = $profileUsername;
-}
-
-/**
- */
-public
-function getProfileTimestamp(): DateTime {
-	return ($this->profileTimestamp);
-}
-
-/**
- * @param string $profileUsername
- */
-public
-function setProfileTimestamp(DateTime $profileTimestamp): void {
-	$this->profileTimestamp = $newProfileTimestamp;
-}
-
-/**
- * accessor method for phone
- *new profile phone or just phone
- * @return string value of phone or null
- **/
-public
-function getProfilePhone(): ?string {
-	return ($this->profilePhone);
-}
-
-/**
- * mutator method for phone
- *
- * @param string $newProfilePhone new value of phone
- * @throws \InvalidArgumentException if $newPhone is not a string or insecure
- * @throws \RangeException if $newPhone is > 32 characters
- * @throws \TypeError if $newPhone is not a string
- **/
-public function setProfilePhone(?string $newProfilePhone): void {
-	//if $profilePhone is null return it right away
-	if($newProfilePhone === null) {
-		$this->profilePhone = null;
-		return;
+	/**
+	 * @return string
+	 */
+	public function getProfileEmail(): string {
+		return ($this->profileEmail);
 	}
-	// verify the phone is secure
-	$newProfilePhone = trim($newProfilePhone);
-	$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	if(empty($newProfilePhone) === true) {
-		throw(new \InvalidArgumentException("profile phone is empty or insecure"));
-	}
-	// verify the phone will fit in the database
-	if(strlen($newProfilePhone) > 32) {
-		throw(new \RangeException("profile phone is too large"));
-	}
-	// store the phone
-	$this->profilePhone = $newProfilePhone;
-}
 
-/**
- *
- * mutator method for profile hash password
- *
- * @param string $newProfileHash
- * @throws \InvalidArgumentException if the hash is not secure
- * @throws \RangeException if the hash is not 128 characters
- * @throws \TypeError if profile hash is not a string
- */
+	/**
+	 * sanatize
+	 * strlength
+	 * @param string $authorEmail
+	 */
+	public function setProfileEmail(string $newProfileEmail): void {
+		$newProfileEmail = trim($newProfileEmail);
+		$newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
+		if(empty($newProfileEmail) === true) {
+			throw(new \InvalidArgumentException("email is empty or insecure"));
+		}
+		// verify the email will fit in the database
+		if(strlen($newProfileEmail) > 128) {
+			throw(new \RangeException("profile email is too large"));
+		}
+
+		$this->profileEmail = $newProfileEmail;
+	}
+	}
+
+	/**
+	 * what do you need for hash acc/mutator?
+	 * @return string
+	 */
+	public function getProfileHash(): string {
+		return ($this->profileHash);
+	}
+
+	/**
+	 * @param string $profileHash
+	 */
+	public function setProfileHash(string $profileHash): void {
+		$this->profileHash = $profileHash;
+	}
+
+	/**
+	 */
+	public function getProfileUsername(): string {
+		return ($this->profileUsername);
+	}
+
+	/**
+	 * @param string $profileUsername
+	 */
+	public function setProfileUsername(string $profileUsername): void {
+		$this->profileUsername = $profileUsername;
+	}
+
+	/**
+	 */
+	public function getProfileTimestamp(): DateTime {
+		return ($this->profileTimestamp);
+	}
+
+	/**
+	 * @param string $profileUsername
+	 */
+	public function setProfileTimestamp(DateTime $profileTimestamp): void {
+		$this->profileTimestamp = $newProfileTimestamp;
+	}
+
+	/**
+	 * accessor method for phone
+	 *new profile phone or just phone
+	 * @return string value of phone or null
+	 **/
+	public function getProfilePhone(): ?string {
+		return ($this->profilePhone);
+	}
+
+	/**
+	 * mutator method for phone
+	 *
+	 * @param string $newProfilePhone new value of phone
+	 * @throws \InvalidArgumentException if $newPhone is not a string or insecure
+	 * @throws \RangeException if $newPhone is > 32 characters
+	 * @throws \TypeError if $newPhone is not a string
+	 **/
+	public function setProfilePhone(?string $newProfilePhone): void {
+		//if $profilePhone is null return it right away
+		if($newProfilePhone === null) {
+			$this->profilePhone = null;
+			return;
+		}
+		// verify the phone is secure
+		$newProfilePhone = trim($newProfilePhone);
+		$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newProfilePhone) === true) {
+			throw(new \InvalidArgumentException("profile phone is empty or insecure"));
+		}
+		// verify the phone will fit in the database
+		if(strlen($newProfilePhone) > 32) {
+			throw(new \RangeException("profile phone is too large"));
+		}
+		// store the phone
+		$this->profilePhone = $newProfilePhone;
+	}
+
+	/**
+	 *
+	 * mutator method for profile hash password
+	 *
+	 * @param string $newProfileHash
+	 * @throws \InvalidArgumentException if the hash is not secure
+	 * @throws \RangeException if the hash is not 128 characters
+	 * @throws \TypeError if profile hash is not a string
+	 */
 //public function setProfileHash(string $newProfileHash): void {
 //	//enforce that the hash is properly formatted
 //	$newProfileHash = trim($newProfileHash);
@@ -225,33 +228,34 @@ public function setProfilePhone(?string $newProfilePhone): void {
 //}
 
 
-/**
- * inserts profile in SQL
- *
- * @param \PDO $pdo PDO connection object
- * @throws \PDOException when mySQL related errors occur
- * @throws \TypeError if $pdo is not a PDO connection object
- **/
-public function insert(\PDO $pdo): void {
-	$query = "INSERT INTO profile(profileId, profilePhone, profileUsername, profileEmail, profileHash, profileTimestamp)
+	/**
+	 * inserts profile in SQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo): void {
+		$query = "INSERT INTO profile(profileId, profilePhone, profileUsername, profileEmail, profileHash, profileTimestamp)
 VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash, :profileTimestamp)";
-	$statement = $pdo->prepare($query);
-	$parameters = ["profileId" => $this->profileId->getBytes(), "profilePhone" => $this->profilePhone, "profileUsername" => $this->profileUsername, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileTimestamp" => $this->profileTimestamp];
-	$statement->execute($parameters);
-}
-/**
-* deletes this Profile from mySQL
-*
- * @param \PDO $pdo PDO connection object
-* @throws \PDOException when mySQL related errors occur
-* @throws \TypeError if $pdo is not a PDO connection object
-**/
-public function delete(\PDO $pdo): void {
-	$query = "DELETE FROM profile WHERE profileId = :profileId";
-	$statement = $pdo->prepare($query);
-	$parameters = ["profileId" => $this->profileId->getBytes()];
-	$statement->execute($parameters);
-}
+		$statement = $pdo->prepare($query);
+		$parameters = ["profileId" => $this->profileId->getBytes(), "profilePhone" => $this->profilePhone, "profileUsername" => $this->profileUsername, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileTimestamp" => $this->profileTimestamp];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * deletes this Profile from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo): void {
+		$query = "DELETE FROM profile WHERE profileId = :profileId";
+		$statement = $pdo->prepare($query);
+		$parameters = ["profileId" => $this->profileId->getBytes()];
+		$statement->execute($parameters);
+	}
 
 	/**
 	 * updates this Profile from mySQL
@@ -259,7 +263,7 @@ public function delete(\PDO $pdo): void {
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 **/
-public function update(\PDO $pdo): void {
+	public function update(\PDO $pdo): void {
 		// create query template
 		$query = "UPDATE profile SET profilePhone = :profilePhone,profileUsername = :profileUsername,profileEmail = :profileEmail, profileHash = :profileHash, profileTimestamp = :profileTimestamp WHERE profileId = :profileId";
 		$statement = $pdo->prepare($query);
@@ -285,25 +289,17 @@ public function update(\PDO $pdo): void {
 //		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 //			throw(new \PDOException($exception->getMessage(), 0, $exception));
 //		}
+	/**
+	 * @return array resulting state variables to serialize
+	 *  state variables for JSON serialization
+	 * *unset hash?? add for token
+	 **/
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		$fields["profileId"] = $this->profileId->toString();
+		return ($fields);
+	}
 
-
-
-
-
-
-/**
- * @return array resulting state variables to serialize
- *  state variables for JSON serialization
- * *unset hash?? add for token
- **/
-public
-function jsonSerialize() {
-	$fields = get_object_vars($this);
-	$fields["profileId"] = $this->profileId->toString();
-	unset($fields["profileHash"]);
-	return ($fields);
-}
-}
 
 
 
