@@ -119,7 +119,6 @@ class Profile implements \JsonSerializable {
 
 		$this->profileEmail = $newProfileEmail;
 	}
-	}
 
 	/**
 	 * what do you need for hash acc/mutator?
@@ -145,8 +144,8 @@ class Profile implements \JsonSerializable {
 	/**
 	 * @param string $profileUsername
 	 */
-	public function setProfileUsername(string $profileUsername): void {
-		$this->profileUsername = $profileUsername;
+	public function setProfileUsername(string $newProfileUsername): void {
+		$this->profileUsername = $newProfileUsername;
 	}
 
 	/**
