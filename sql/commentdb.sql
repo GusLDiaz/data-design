@@ -12,8 +12,6 @@ CREATE TABLE profile (
 	profilePhone VARCHAR(32),
 	profileTimestamp VARCHAR (128) NOT NULL,
 	profileUsername VARCHAR(32),
-
-	-- phone vs email - whether null values are flagged by unique or not (solved - doesn't apply for mySQL)
 	UNIQUE(profileUsername),
 	UNIQUE(profileEmail),
 	PRIMARY KEY(profileId)
@@ -30,7 +28,6 @@ CREATE TABLE comment (
 	INDEX(commentCommentId),
 	FOREIGN KEY(commentProfileId) REFERENCES profile(profileId),
 	FOREIGN KEY(commentCommentId) REFERENCES comment(commentId),
-	--analyse for recursion?
 	PRIMARY KEY(commentId)
 	);
 
