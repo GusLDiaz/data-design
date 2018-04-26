@@ -294,7 +294,7 @@ VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash,
 	 *  state variables for JSON serialization
 	 * *unset hash?? add for token
 	 **/
-	public function jsonSerialize() {
+	public function jsonSerialize() : array {
 		$fields = get_object_vars($this);
 		$fields["profileId"] = $this->profileId->toString();
 		return ($fields);
