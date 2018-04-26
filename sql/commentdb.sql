@@ -27,11 +27,10 @@ CREATE TABLE comment (
 	commentTimestamp DATETIME(6) NOT NULL,
 	commentViaTag TINYINT ,
 	INDEX(commentProfileId),
-	-- can you index something that's optional (notnull?)
 	INDEX(commentCommentId),
 	FOREIGN KEY(commentProfileId) REFERENCES profile(profileId),
 	FOREIGN KEY(commentCommentId) REFERENCES comment(commentId),
 	--analyse for recursion?
 	PRIMARY KEY(commentId)
-);
+	);
 
