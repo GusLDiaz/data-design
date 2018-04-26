@@ -19,9 +19,12 @@
 namespace Edu\Cnm\DataDesign;
 use Ramsey\Uuid\Uuid;
 
-class Profile implements JSONSerializable {
-	use ValidateUuid;
+//class Profile implements \JSONSerializable {
+class Profile implements jsonSerialize {	use ValidateUuid;
+	/**use ValidateDate;
 
+	 * use ValidateDate
+	 */
 
 	/**
 	 * profile: primary key
@@ -122,7 +125,7 @@ function getProfileHash(): string {
  */
 public
 function setProfileHash(string $profileHash): void {
-	$this->authorHash = $profileHash;
+	$this->profileHash = $profileHash;
 }
 
 /**
@@ -162,7 +165,7 @@ function setProfileTimestamp(DateTime $profileTimestamp): void {
  **/
 public
 function getProfilePhone(): ?string {
-	return ($this->newProfilePhone);
+	return ($this->profilePhone);
 }
 
 /**
