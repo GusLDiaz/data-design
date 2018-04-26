@@ -14,22 +14,9 @@ class Comment implements JSONSerializable {
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		$fields["commentId"] = $this->commentId->toString();
-		unset($fields["profileHash"]);
+		unset($fields["*/commentHash"]);
 		return ($fields);
 	}
-//<h3>comment</h3>
-//<dl>
-//<dt>commentId</dt>
-//<dd>primary key</dd>
-//<dt>commentProfileId</dt>
-//<dd>foriegn key</dd>
-//<dt>commentCommentId</dt>
-//<dd>foreign key calling replys</dd>
-//<dt>commentContent</dt>
-//<dt>commmentTimestamp</dt>
-//<dd>register time</dd>
-//<dt>commentViaTag</dt>
-
 protected $commentId;
 protected $commentProfileId;
 protected $commentCommentId;
@@ -37,10 +24,15 @@ protected $commentContent;
 protected $commentTimestamp;
 protected $commentViaTag;
 
-public function __construct($commentId, $commentProfileId, $commentCommentId, string $commmentContent, DateTime $commentTimestamp, ***int $commentViaTag) {
+public function __construct($commentId, $commentProfileId, $commentCommentId, string $commmentContent, DateTime $commentTimestamp, Tinyint $commentViaTag) {{
 		try {
 			$this->setCommentId($newCommentId);
 			$this->setCommentCommentId($newCommentCommentId);
 			$this->setCommentContent($newCommentContent);
 			$this->setCommentViaTag($newCommentViaTag);
 			$this->setCommentTimestamp($newCommentTimestamp);)
+
+}catch (\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+		$exceptionType = get_class($exception);
+		throw(new $exceptionType($exception->getMessage(), 0, $exception));
+}
