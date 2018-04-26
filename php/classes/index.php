@@ -162,33 +162,14 @@ function setProfileTimestamp(DateTime $profileTimestamp): void {
 	$this->profileTimestamp = $profileTimestamp;
 }
 
-
-/**
- * @return array resulting state variables to serialize
- *  state variables for JSON serialization
- * *unset hash?? add for token
- **/
-public
-function jsonSerialize() {
-	$fields = get_object_vars($this);
-	$fields["profileId"] = $this->profileId->toString();
-	unset($fields["profileHash"]);
-	return ($fields);
-}
-
-/**
- *
- */
-
-
 /**
  * accessor method for phone
- *
+ *new profile phone or just phone
  * @return string value of phone or null
  **/
 public
 function getProfilePhone(): ?string {
-	return ($this->profilePhone);
+	return ($this->newProfilePhone);
 }
 
 /**
@@ -290,6 +271,7 @@ public function delete(\PDO $pdo): void {
 		$statement->execute($parameters);
 	}
 
+
 	/**
 	 * gets the Profile by profile id
 	 *
@@ -299,20 +281,32 @@ public function delete(\PDO $pdo): void {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public
-	static function getProfileByProfileId(\PDO $pdo, string $profileId): ?Profile {
-		// sanitize the profile id before searching
-		try {
-			$profileId = self::validateUuid($profileId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
+//	public
+//	static function getProfileByProfileId(\PDO $pdo, string $profileId): ?Profile {
+//		// sanitize the profile id before searching
+//		try {
+//			$profileId = self::validateUuid($profileId);
+//		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+//			throw(new \PDOException($exception->getMessage(), 0, $exception));
+//		}
 
 
 
 
 
 
+/**
+ * @return array resulting state variables to serialize
+ *  state variables for JSON serialization
+ * *unset hash?? add for token
+ **/
+public
+function jsonSerialize() {
+	$fields = get_object_vars($this);
+	$fields["profileId"] = $this->profileId->toString();
+	unset($fields["profileHash"]);
+	return ($fields);
+}
 
 
 
