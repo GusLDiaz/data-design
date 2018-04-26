@@ -259,7 +259,7 @@ public function delete(\PDO $pdo): void {
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 **/
-	public function update(\PDO $pdo): void {
+public function update(\PDO $pdo): void {
 		// create query template
 		$query = "UPDATE profile SET profilePhone = :profilePhone,profileUsername = :profileUsername,profileEmail = :profileEmail, profileHash = :profileHash, profileTimestamp = :profileTimestamp WHERE profileId = :profileId";
 		$statement = $pdo->prepare($query);
