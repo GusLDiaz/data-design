@@ -16,20 +16,13 @@
  *
  * update delete insert
  */
+namespace Edu\Cnm\DataDesign;
+use Ramsey\Uuid\Uuid;
 
-/**use validate UUID?
- *
- */
 class Profile implements JSONSerializable {
-	use Ramsey\Uuid\Uuid;
+	use ValidateUuid;
 
-//protected $profileId n null
-//<dd>primary key</dd>
-"*<dt>profileHash</dt>"
-//protected $profileTimeStamp
-//protected $profilePhone
-//protected $profileEmail
-//protected $profileUsername
+
 	/**
 	 * profile: primary key
 	 * @var (Uuid) $profileId
