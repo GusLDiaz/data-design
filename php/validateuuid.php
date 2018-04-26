@@ -6,7 +6,7 @@
  * Time: 11:22 AM
  */
 namespace Edu\Cnm\DataDesign;
-require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+//require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 /**
  * Trait to validate a uuid
