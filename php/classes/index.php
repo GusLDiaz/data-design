@@ -19,8 +19,8 @@
 namespace Edu\Cnm\DataDesign;
 use Ramsey\Uuid\Uuid;
 
-//class Profile implements \JSONSerializable {
-class Profile implements jsonSerialize {	use ValidateUuid;
+class Profile implements JSONSerializable {
+	use ValidateUuid;
 	/**use ValidateDate;
 
 	 * use ValidateDate
@@ -35,25 +35,25 @@ class Profile implements jsonSerialize {	use ValidateUuid;
 	 * profile: Email (unique)
 	 * @var string $profileEmail
 	 */
-	private $profileEmail;
+	protected $profileEmail;
 	/**
 	 * profile: hash-- what does this do?**
 	 * @var ****** $profileHash
 	 */
-	private $profileHash;
+	protected $profileHash;
 	/**
 	 * profile: username (unique)
 	 * @var string $profileUsername
 	 */
-	private $profileUsername;
+	protected $profileUsername;
 	/**
 	 * @var string $profilePhone
 	 */
-	private $profilePhone;
+	protected $profilePhone;
 	/**
 	 * @var DateTime $profileTimestamp
 	 */
-	private $profileTimestamp;
+	protected $profileTimestamp;
 
 
 //public static function
@@ -108,7 +108,7 @@ function getProfileEmail(): string {
  */
 public
 function setProfileEmail(string $profileEmail): void {
-	$this->profileEmail = $profileEmail;
+	$this->profileEmail = $newProfileEmail;
 }
 
 /**
@@ -155,7 +155,7 @@ function getProfileTimestamp(): DateTime {
  */
 public
 function setProfileTimestamp(DateTime $profileTimestamp): void {
-	$this->profileTimestamp = $profileTimestamp;
+	$this->profileTimestamp = $newProfileTimestamp;
 }
 
 /**
@@ -302,6 +302,7 @@ function jsonSerialize() {
 	$fields["profileId"] = $this->profileId->toString();
 	unset($fields["profileHash"]);
 	return ($fields);
+}
 }
 
 
