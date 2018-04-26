@@ -23,11 +23,7 @@ use Ramsey\Uuid\Uuid;
 
 class Profile implements \JsonSerializable {
 	use ValidateUuid;
-
-	/**use ValidateDate;
-	 * use ValidateDate
-	 */
-
+	use ValidateDate;
 	/**
 	 * profile: primary key
 	 * @var (Uuid) $profileId
@@ -80,7 +76,7 @@ class Profile implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs\
 	 **/
 	public
-	function __construct($newProfileId, string $newProfileEmail, $newProfileHash, string $newProfileUsername, DateTime $newProfileTimestamp) {
+	function __construct($newProfileId, string $newProfileEmail, $newProfileHash, string $newProfileUsername, $newProfileTimestamp) {
 		try {
 			$this->setProfileId($newProfileId);
 			$this->setProfileEmail($newProfileEmail);
@@ -93,6 +89,7 @@ class Profile implements \JsonSerializable {
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
+
 	public function getProfileId() {
 		return $this->profileId;
 	}
@@ -106,7 +103,8 @@ class Profile implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
-		}$this->profileId = $newProfileId;
+		}
+		$this->profileId = $newProfileId;
 	}
 
 	/**
@@ -165,14 +163,11 @@ class Profile implements \JsonSerializable {
 
 	/**
 	 */
-	public function getProfileTimestamp(): DateTime {
+	public function getProfileTimestamp(): \DateTime {
 		return ($this->profileTimestamp);
 	}
 
-	/**
-	 * @param string $profileUsername
-	 */
-	public function setProfileTimestamp(DateTime $profileTimestamp): void {
+	public function setProfileTimestamp(\DateTime $newProfileTimestamp): void {
 		$this->profileTimestamp = $newProfileTimestamp;
 	}
 
@@ -308,12 +303,13 @@ VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash,
 	 *  state variables for JSON serialization
 	 * *unset hash?? add for token
 	 **/
-	public function jsonSerialize() : array {
+
+	public function jsonSerialize(): array {
 		$fields = get_object_vars($this);
 		$fields["profileId"] = $this->profileId->toString();
 		return ($fields);
 	}
-
+}
 
 
 
