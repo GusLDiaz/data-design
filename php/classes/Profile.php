@@ -148,6 +148,7 @@ class Profile implements \JsonSerializable {
 	}
 
 	/**
+	 * do this set sanatize string, etc.
 	 * @param string $profileUsername
 	 */
 	public function setProfileUsername(string $newProfileUsername): void {
