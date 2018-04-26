@@ -168,6 +168,17 @@ class Profile implements \JsonSerializable {
 	}
 
 	public function setProfileTimestamp(\DateTime $newProfileTimestamp): void {
+			// base case: if the date is null, use the current date and time
+			if($newProfileTimestamp === null) {
+				$this->profileTimestamp = new \DateTime();
+				return;
+			}
+			try {
+				$newProfileTimestamp = self::validateDateTime($newProfileTimestamp);
+			} catch(\InvalidArgumentException | \RangeException $exception) {
+				$exceptionType = get_class($exception);
+				throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
 		$this->profileTimestamp = $newProfileTimestamp;
 	}
 
