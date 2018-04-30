@@ -44,7 +44,7 @@ class Profile implements \JsonSerializable {
 	 */
 	protected $profilePhone;
 	/**
-	 * @var DateTime $profileTimestamp
+	 * @var \DateTime $profileTimestamp
 	 */
 	protected $profileTimestamp;
 
@@ -183,14 +183,14 @@ class Profile implements \JsonSerializable {
 			$this->profileUsername = null;
 			return;
 		}
-	$newProfileUsername = trim($newProfileUsername);
-	$newProfileUsername = filter_var($newProfileUsername, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	if(empty($newProfileUsername) === true) {
-		throw(new \InvalidArgumentException("username is empty "));
-	}
-	if(strlen($newProfileUsername) > 32) {
-		throw(new \RangeException("username is too long"));
-	}
+		$newProfileUsername = trim($newProfileUsername);
+		$newProfileUsername = filter_var($newProfileUsername, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newProfileUsername) === true) {
+			throw(new \InvalidArgumentException("username is empty "));
+		}
+		if(strlen($newProfileUsername) > 32) {
+			throw(new \RangeException("username is too long"));
+		}
 		$this->profileUsername = $newProfileUsername;
 	}
 
@@ -210,16 +210,16 @@ class Profile implements \JsonSerializable {
 	 * @throws \Exception
 	 */
 	public function setProfileTimestamp($newProfileTimestamp = null): void {
-			// base case: if the date is null, use the current date and time
-			if($newProfileTimestamp === null) {
-				$this->profileTimestamp = new \DateTime();
-				return;
-			}
-			try {
-				$newProfileTimestamp = self::validateDateTime($newProfileTimestamp);
-			} catch(\InvalidArgumentException | \RangeException $exception) {
-				$exceptionType = get_class($exception);
-				throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		// base case: if the date is null, use the current date and time
+		if($newProfileTimestamp === null) {
+			$this->profileTimestamp = new \DateTime();
+			return;
+		}
+		try {
+			$newProfileTimestamp = self::validateDateTime($newProfileTimestamp);
+		} catch(\InvalidArgumentException | \RangeException $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 		$this->profileTimestamp = $newProfileTimestamp;
 	}
@@ -257,9 +257,6 @@ class Profile implements \JsonSerializable {
 		}
 		$this->profilePhone = $newProfilePhone;
 	}
-
-
-
 
 
 	/**
@@ -301,7 +298,7 @@ VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash,
 	public function update(\PDO $pdo): void {
 		$query = "UPDATE profile SET profilePhone = :profilePhone,profileUsername = :profileUsername,profileEmail = :profileEmail, profileHash = :profileHash, profileTimestamp = :profileTimestamp WHERE profileId = :profileId";
 		$statement = $pdo->prepare($query);
-		$parameters = ["profileId" => $this->profileId->getBytes(),"profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profilePhone" => $this->profilePhone, "profileUsername" => $this->profileUsername, "profileTimestamp"=> $this->profileTimestamp];
+		$parameters = ["profileId" => $this->profileId->getBytes(), "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profilePhone" => $this->profilePhone, "profileUsername" => $this->profileUsername, "profileTimestamp" => $this->profileTimestamp];
 		$statement->execute($parameters);
 	}
 
@@ -315,8 +312,7 @@ VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash,
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public
-	static function getProfileByProfileId(\PDO $pdo, string $profileId): ?Profile {
+	public static function getProfileByProfileId(\PDO $pdo, string $profileId): ?Profile {
 
 		try {
 			$profileId = self::validateUuid($profileId);
