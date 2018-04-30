@@ -11,7 +11,7 @@ CREATE TABLE profile (
 	profileHash CHAR(97) NOT NULL,
 	profilePhone VARCHAR(32),
 	profileTimestamp VARCHAR (128) NOT NULL,
-	profileUsername VARCHAR(32),
+	profileUsername VARCHAR(32) NOT NULL,
 	UNIQUE(profileUsername),
 	UNIQUE(profileEmail),
 	PRIMARY KEY(profileId)
