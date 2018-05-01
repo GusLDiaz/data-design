@@ -306,7 +306,7 @@ VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash,
 	/**
 	 * gets the Profile by profile id
 	 *
-	 * @param \PDO $pdo $pdo PDO connection object
+	 * @param \PDO $pdo PDO connection object -- select
 	 * @param string $profileId profile Id to search for
 	 * @return Profile|null Profile or null if not found
 	 * @throws \PDOException when mySQL related errors occur
@@ -318,7 +318,25 @@ VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash,
 			$profileId = self::validateUuid($profileId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
+
 		}
+		$query = "SELECT profileId, profilePhone, profileUsername, profileEmail, profileHash, profileTimestamp FROM profile WHERE profileId = :profileId";
+		$statement = $pdo->prepare($query);
+		$parameters = ["profileId" => $profileId->getBytes()];
+		$statement->execute($parameters);
+		// grab Profile from mySQL
+		try {
+			$profile = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$profile = new Profile($row["profileId"], $row["profilePhone"], $row["profileUsername"], $row["profileEmail"], $row["profileHash"], $row["profileTimestamp"]);
+			}
+		} catch
+		(\Exception $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($profile);
 	}
 
 	/**
