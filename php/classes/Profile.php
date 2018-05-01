@@ -340,6 +340,41 @@ VALUES :profileId, :profilePhone, :profileUsername, :profileEmail, :profileHash,
 	}
 
 	/**
+	 * gets the Profile by email
+	 * sanatise Email before searching
+	 * if a valid email create & execute a select query template
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $profileEmail
+	 * @return Profile|null Profile or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getProfileByProfileEmail(\PDO $pdo, string $profileEmail): ?Profile {
+		$profileEmail = trim($profileEmail);
+		$profileEmail = filter_var($profileEmail, FILTER_VALIDATE_EMAIL);
+		if(empty($profileEmail) === true) {
+			throw(new \PDOException("not valid email"));
+		}
+		$query = "SELECT profileId, profilePhone, profileUsername, profileHash, profileTimestamp FROM profile WHERE profileEmail= :profileEmail";
+		$statement = $pdo->prepare($query);
+		$parameters = ["profileEmail" => $profileEmail];
+		$statement->execute($parameters);
+		try {
+			$profile = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$profile = new Profile($row["profileId"], $row["profilePhone"], $row["profileUsername"], $row["profileEmail"], $row["profileHash"],$row["profileTimestamp"]);
+			}
+		} catch(\Exception $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($profile);
+	}
+
+
+	/**
 	 * @return array resulting state variables to serialize
 	 *  state variables for JSON serialization
 	 *
