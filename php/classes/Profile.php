@@ -178,7 +178,6 @@ class Profile implements \JsonSerializable {
 	 * @throws \RangeException if username is greater than 32 characters
 	 */
 	public function setProfileUsername(?string $newProfileUsername): void {
-		//if $profileUsername is null return it right away
 		if($newProfileUsername === null) {
 			$this->profileUsername = null;
 			return;

@@ -4,8 +4,6 @@ DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS profile;
 
 CREATE TABLE profile (
-	-- this creates the attribute for the primary key
-	-- not null means the attribute is required!
 	profileID BINARY(16) NOT NULL,
 	profileEmail VARCHAR(128),
 	profileHash CHAR(97) NOT NULL,
